@@ -9,14 +9,17 @@ import Header from './components/Header';
 import Error from './components/Error';
 import Freelances from './pages/Freelances';
 import Results from './pages/Results';
-
+import { GlobalStyles } from './styles/GlobalStyles';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <GlobalStyles/>
       <Header />
       <Routes>
         <Route path='/' element={<Home/>}/> 

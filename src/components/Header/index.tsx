@@ -1,12 +1,24 @@
-import { Link } from "react-router-dom";
+import { HeaderContainer, Logo } from "./HeaderStyle"
+import logo from "../../assets/dark-logo.png"
+import { StyledLink } from "../../styles/Atoms"
+import { Link } from "react-router-dom"
 
 function Header(){
     return (
-        <nav>
-            <Link to='/'>Acceuil</Link>
-            <Link to="/survey/42">Questionnaire</Link>
-            <Link to='/results'>Results</Link>
-        </nav>
+        <HeaderContainer>
+            <Link to='/'>
+                <Logo src={logo} alt="shiny_logo"/>
+            </Link>
+            
+            <div>
+                <StyledLink to='/'>Acceuil</StyledLink>
+                <StyledLink to="/freelances">
+                    Profils
+                </StyledLink>
+                <StyledLink to='/survey' isFullLink>Faire le test</StyledLink>
+            </div>
+        </HeaderContainer>
+       
     )
 }
 
