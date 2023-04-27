@@ -1,9 +1,9 @@
 import Card from '../../components/Card'
 import DefaultPicture from '../../assets/profile.png'
-import CardsContainer from './FreelancesStyles'
+import { ProfileContainer, FreelanceWrapper, Subtitle, PageTitle } from './FreelancesStyles'
 
 function Freelances(){
-    const freelanceProfiles = [
+  const freelanceProfiles = [
         {
           name: 'Jane Doe',
           jobTitle: 'Devops',
@@ -21,9 +21,10 @@ function Freelances(){
         },
       ]
     return (
-        <div>
-            <h1>Freelance 👩‍💻👨‍💻👩‍💻</h1>
-            <CardsContainer>
+        <FreelanceWrapper>
+            <PageTitle>Trouver votre prestataire</PageTitle>
+            <Subtitle>Chez Shiny nous réunissons les meilleurs profils pour vous.</Subtitle>
+            <ProfileContainer>
                 {
                     freelanceProfiles.map(((profile, index) => (
                         <Card
@@ -34,8 +35,8 @@ function Freelances(){
                         />
                     )))
                 }
-            </CardsContainer>
-        </div>
+            </ProfileContainer>
+        </FreelanceWrapper>
     )
 }
 
