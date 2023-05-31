@@ -21,7 +21,10 @@ export const FreelanceWrapper = styled.div`
     flex-direction:column;
     align-items:center;
 `
-
+export const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 export const Subtitle = styled.h2`
     font-size: 20px;
