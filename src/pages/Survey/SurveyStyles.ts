@@ -22,7 +22,7 @@ export const AnswerContainer = styled.div`
     justify-content:center;
     align-items:center;
 `
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div<{isSelected:boolean}>`
     display:flex;
     border: 2px solid var(--background-light);
     border-radius: 31px;
@@ -32,6 +32,8 @@ export const ButtonContainer = styled.div`
     align-items:center;
     margin: 63px 42px 63px;
     background-color: var(--background-light);
+    box-shadow: ${(isSelected) =>
+        isSelected ? `0px 0px 0px 2px var(--primary-100) inset` : 'none'};
     &:hover{
         border-color:var(--primary-100);
     }

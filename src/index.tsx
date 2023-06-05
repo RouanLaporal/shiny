@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import Freelances from './pages/Freelances';
 import Results from './pages/Results';
 import GlobalStyles  from './utils/styles/GlobalStyles';
-import { ThemeProvider } from './utils/context';
+import { ThemeProvider, SurveyProvider } from './utils/context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,6 +22,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <ThemeProvider>
+      <SurveyProvider>
       <GlobalStyles/>
       <Header />
       <Routes>
@@ -32,6 +33,7 @@ root.render(
         <Route path='*' element={<Error/>}/>
       </Routes>
       <Footer/>
+      </SurveyProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

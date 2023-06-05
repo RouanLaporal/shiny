@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import * as Style from "./SurveyStyles"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Loader } from "../../styles/Atoms";
+import { SurveyContext } from "../../utils/context";
 
 type SurveyParams = {
     questionNumber:string;
@@ -10,6 +11,8 @@ type SurveyParams = {
 interface Map {
     [key: string]: string | undefined
 };
+
+
 function Survey(){
     const { questionNumber = '1' } = useParams<SurveyParams>();
     const questionNumberInt = parseInt(questionNumber);
@@ -17,7 +20,12 @@ function Survey(){
     const nextQuestion = questionNumberInt +1
     const [surveyData, setSurveyData] = useState<Map>({})
     const [isDataLoading, setDataLoading] = useState(false)
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
+    const {saveAnswers, answers} = useContext(SurveyContext);
+
+    function saveReply(answer:boolean) {
+        saveAnswers({ [questionNumber]: answer})
+    }
 
     useEffect(() => {    
         async function fetchSurvey(){
@@ -47,14 +55,26 @@ function Survey(){
                     : <p>{ surveyData[questionNumber]}</p>
                 }
             </Style.QuestionContainer>
-            <Style.AnswerContainer>
-                <Style.ButtonContainer>
-                    <Style.ButtonText>Oui</Style.ButtonText>
-                </Style.ButtonContainer>
-                <Style.ButtonContainer>
-                    <Style.ButtonText>Non</Style.ButtonText>
-                </Style.ButtonContainer>
-            </Style.AnswerContainer>
+            { answers &&
+                <Style.AnswerContainer>
+                    <Style.ButtonContainer
+                        onClick={() => saveReply(true)}
+                        isSelected={ answers[questionNumber]===true }
+                    >
+                        <Style.ButtonText>
+                            Oui
+                        </Style.ButtonText>
+                    </Style.ButtonContainer>
+                    <Style.ButtonContainer
+                        onClick={() => saveReply(false)}
+                        isSelected={ answers[questionNumber]===false }
+                    >
+                        <Style.ButtonText>
+                            Non
+                        </Style.ButtonText>
+                    </Style.ButtonContainer>
+                </Style.AnswerContainer>
+            }
             
             
             <div>
