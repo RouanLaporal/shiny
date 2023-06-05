@@ -1,15 +1,18 @@
 import { useParams } from "react-router-dom";
 import * as Style from "./SurveyStyles"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Loader } from "../../styles/Atoms";
 import { SurveyContext } from "../../utils/context";
+import { useFetch } from "../../utils/hooks";
 
 type SurveyParams = {
     questionNumber:string;
 };
 
-interface Map {
-    [key: string]: string | undefined
+interface Survey {
+    surveyData: {
+        [key: string]: string | undefined
+    }
 };
 
 
@@ -18,31 +21,13 @@ function Survey(){
     const questionNumberInt = parseInt(questionNumber);
     const previousQuestion = questionNumberInt === 1 ? 1 : questionNumberInt - 1;
     const nextQuestion = questionNumberInt +1
-    const [surveyData, setSurveyData] = useState<Map>({})
-    const [isDataLoading, setDataLoading] = useState(false)
-    const [error, setError] = useState(false);
     const {saveAnswers, answers} = useContext(SurveyContext);
-
+    const { data, isLoading, error } = useFetch<Survey>(`http://localhost:8000/survey`);
+    console.log(data);
+    const  surveyData  = data?.surveyData;
     function saveReply(answer:boolean) {
         saveAnswers({ [questionNumber]: answer})
     }
-
-    useEffect(() => {    
-        async function fetchSurvey(){
-            setDataLoading(true)
-            try{
-                const response = await fetch(`http://localhost:8000/survey`)
-                const { surveyData } = await response.json()
-                setSurveyData(surveyData)
-            }catch(error){
-                console.log(error)
-                setError(true)
-            }finally{
-                setDataLoading(false)
-            }
-        }
-        fetchSurvey()
-    }, [])
 
     if(error)
         return <span>Oups il y a un problème...</span>
@@ -50,9 +35,9 @@ function Survey(){
         <Style.SurverContainer>
             <Style.QuestionContainer>
                 <Style.QuestionTitle>Question {questionNumber}</Style.QuestionTitle>
-                {isDataLoading 
+                {isLoading 
                     ? (<Loader/>)
-                    : <p>{ surveyData[questionNumber]}</p>
+                    : <p>{ surveyData && surveyData[questionNumber]}</p>
                 }
             </Style.QuestionContainer>
             { answers &&

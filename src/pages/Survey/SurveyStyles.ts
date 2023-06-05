@@ -24,7 +24,7 @@ export const AnswerContainer = styled.div`
 `
 export const ButtonContainer = styled.div<{isSelected:boolean}>`
     display:flex;
-    border: 2px solid var(--background-light);
+    border: 2px;
     border-radius: 31px;
     width:291px;
     height:96px;
@@ -32,11 +32,8 @@ export const ButtonContainer = styled.div<{isSelected:boolean}>`
     align-items:center;
     margin: 63px 42px 63px;
     background-color: var(--background-light);
-    box-shadow: ${(isSelected) =>
-        isSelected ? `0px 0px 0px 2px var(--primary-100) inset` : 'none'};
-    &:hover{
-        border-color:var(--primary-100);
-    }
+    box-shadow: ${(props) =>
+        props.isSelected ? `0px 0px 0px 2px var(--primary-100) inset` : 'none'};
 `
 export const ButtonText = styled.p`
     &:hover{
