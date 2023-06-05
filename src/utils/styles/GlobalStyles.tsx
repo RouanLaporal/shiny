@@ -2,9 +2,6 @@ import { useContext } from "react"
 import { createGlobalStyle } from "styled-components"
 import { ThemeContext } from "../context"
 
-interface IGlobalStyle{
-    isDarkMode: boolean
-}
 const StyledGlobalStyle= createGlobalStyle<{ isDarkMode: boolean}>`
 :root{
     --primary-100: #5843E4;
