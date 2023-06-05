@@ -7,9 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Error from './components/Error';
+import Footer from './components/Footer';
 import Freelances from './pages/Freelances';
 import Results from './pages/Results';
-import { GlobalStyles } from './styles/GlobalStyles';
+import GlobalStyles  from './utils/styles/GlobalStyles';
+import { ThemeProvider } from './utils/context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,6 +21,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <ThemeProvider>
       <GlobalStyles/>
       <Header />
       <Routes>
@@ -28,6 +31,8 @@ root.render(
         <Route path='/results' element={<Results/>}/>
         <Route path='*' element={<Error/>}/>
       </Routes>
+      <Footer/>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
