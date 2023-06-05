@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import * as Style from "./SurveyStyles"
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Loader } from "../../styles/Atoms";
 import { SurveyContext } from "../../utils/context";
 import { useFetch } from "../../utils/hooks";
@@ -9,7 +9,7 @@ type SurveyParams = {
     questionNumber:string;
 };
 
-interface Survey {
+interface SurveyQuestions {
     surveyData: {
         [key: string]: string | undefined
     }
@@ -22,7 +22,7 @@ function Survey(){
     const previousQuestion = questionNumberInt === 1 ? 1 : questionNumberInt - 1;
     const nextQuestion = questionNumberInt +1
     const {saveAnswers, answers} = useContext(SurveyContext);
-    const { data, isLoading, error } = useFetch<Survey>(`http://localhost:8000/survey`);
+    const { data, isLoading, error } = useFetch<SurveyQuestions>(`http://localhost:8000/survey`);
     console.log(data);
     const  surveyData  = data?.surveyData;
     function saveReply(answer:boolean) {
