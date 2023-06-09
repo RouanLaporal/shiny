@@ -1,9 +1,8 @@
-import { useContext } from "react"
-import { ThemeContext } from "../../utils/context"
 import { FooterContainer, NightModeButton } from "./FooterStyles";
+import { useTheme } from "../../utils/hooks";
 
 function Footer(){
-    const { toggleTheme, theme } = useContext(ThemeContext)
+    const { toggleTheme, theme } = useTheme();
     return (
         <FooterContainer>
             <NightModeButton onClick={() => toggleTheme()}>

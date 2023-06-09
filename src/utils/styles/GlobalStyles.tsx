@@ -1,6 +1,5 @@
-import { useContext } from "react"
 import { createGlobalStyle } from "styled-components"
-import { ThemeContext } from "../context"
+import { useTheme } from "../hooks";
 
 const StyledGlobalStyle= createGlobalStyle<{ isDarkMode: boolean}>`
 :root{
@@ -20,7 +19,7 @@ body{
 }
 `
 function GlobalStyles() {
-    const { theme } = useContext(ThemeContext);
+    const { theme }  = useTheme();
     return <StyledGlobalStyle  isDarkMode={theme === 'dark'} />
 }
 

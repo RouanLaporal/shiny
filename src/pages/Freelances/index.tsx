@@ -1,7 +1,7 @@
-import Card from '../../components/Card'
-import { ProfileContainer, FreelanceWrapper, Subtitle, PageTitle, LoaderWrapper } from './FreelancesStyles'
-import { useEffect, useState } from 'react'
+import Card from '../../components/Card';
+import { ProfileContainer, FreelanceWrapper, Subtitle, PageTitle, LoaderWrapper } from './FreelancesStyles';
 import { Loader } from '../../styles/Atoms';
+import { useFetch } from '../../utils/hooks';
 interface FreelancerProfile {
   id:string;
   name:string;
@@ -9,39 +9,25 @@ interface FreelancerProfile {
   picture:string;
 };
 
+interface FreelancersList {
+  freelancersList: FreelancerProfile[]
+};
+
 function Freelances(){
-  const [isDataLoading, setDataLoading] = useState(false)
-  const [freelancersList, setFreelancersList] = useState<Array<FreelancerProfile>>([])
-  const [error, setError] = useState(false)
-  
-  useEffect(() => {
-    async function fetchFreelance() {
-      setDataLoading(true)
-      try {
-        const response = await fetch(`http://localhost:8000/freelances`)
-        const { freelancersList }= await response.json()
-        setFreelancersList(freelancersList)
-      } catch (error) {
-        console.log(error)
-        setError(true)
-      }finally{
-        setDataLoading(false)
-      }
-    }
-    fetchFreelance()
-  },[]) 
+  const { data, isLoading, error } = useFetch<FreelancersList>(`http://localhost:8000/freelances`);
+  const freelancersList  = data?.freelancersList;
     if(error)
-      return <span> Oups il y  a un problème...</span>
+      return <span> Oups il y  a un problème...</span>;
     return (
         <FreelanceWrapper>
             <PageTitle>Trouver votre prestataire</PageTitle>
             <Subtitle>Chez Shiny nous réunissons les meilleurs profils pour vous.</Subtitle>
             <ProfileContainer>
-                {isDataLoading 
+                {isLoading 
                   ? <LoaderWrapper>
                       <Loader/>
                     </LoaderWrapper>
-                  : freelancersList.map(((profile, index) => (
+                  : freelancersList?.map(((profile, index) => (
                         <Card
                             key={profile.id}
                             label={profile.job}

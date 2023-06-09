@@ -23,7 +23,6 @@ function Survey(){
     const nextQuestion = questionNumberInt +1
     const {saveAnswers, answers} = useContext(SurveyContext);
     const { data, isLoading, error } = useFetch<SurveyQuestions>(`http://localhost:8000/survey`);
-    console.log(data);
     const  surveyData  = data?.surveyData;
     function saveReply(answer:boolean) {
         saveAnswers({ [questionNumber]: answer})
@@ -65,7 +64,7 @@ function Survey(){
             <div>
                 <Style.NavigationLink to={`/survey/${previousQuestion}`}>précedent</Style.NavigationLink>
                 {
-                    questionNumberInt === 10 ? (<Style.NavigationLink to='/results'>Résultats</Style.NavigationLink>) : (<Style.NavigationLink to={`/survey/${nextQuestion}`}>suivant</Style.NavigationLink>)
+                    questionNumberInt === 6 ? (<Style.NavigationLink to='/results'>Résultats</Style.NavigationLink>) : (<Style.NavigationLink to={`/survey/${nextQuestion}`}>suivant</Style.NavigationLink>)
                 }
             </div>           
         </Style.SurverContainer>
