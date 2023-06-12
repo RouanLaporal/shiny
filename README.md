@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Shiny
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a pedagogic project based on the [Open Classroom course](https://openclassrooms.com/fr/courses/7150606-creez-une-application-react-complete). It's the second project of my learning react journey after [La maison jungle](https://github.com/RouanLaporal/La_maison_jungle). I customized the project by adding typescript. You can find the visual of the project [here](https://shiny-psi.vercel.app/).
 
 ## Available Scripts
 
@@ -39,8 +39,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
