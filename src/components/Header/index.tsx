@@ -15,7 +15,7 @@ function Header(){
                 <StyledLink to="/freelances">
                     Profils
                 </StyledLink>
-                <StyledLink to='/survey' isFullLink>Faire le test</StyledLink>
+                <StyledLink to='/survey/1' isFullLink>Faire le test</StyledLink>
             </div>
         </HeaderContainer>
        
