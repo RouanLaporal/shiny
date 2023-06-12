@@ -14,7 +14,7 @@ interface FreelancersList {
 };
 
 function Freelances(){
-  const { data, isLoading, error } = useFetch<FreelancersList>(`http://localhost:8000/freelances`);
+  const { data, isLoading, error } = useFetch<FreelancersList>(`https://shiny.herokuapp.com/freelances`);
   const freelancersList  = data?.freelancersList;
     if(error)
       return <span> Oups il y  a un problème...</span>;

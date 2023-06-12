@@ -34,7 +34,7 @@ function Results(){
     const { theme } = useTheme();
     const { answers } = useContext(SurveyContext);
     const fetchParams = formatQueryParams(answers);
-    const { data, isLoading, error } = useFetch<ResultsData>(`http://localhost:8000/results?${fetchParams}`);
+    const { data, isLoading, error } = useFetch<ResultsData>(`https://shiny.herokuapp.com/results?${fetchParams}`);
     const resultsData = data?.resultsData;
     if(error) {
         return <span>Il y a un problème</span>

@@ -22,7 +22,7 @@ function Survey(){
     const previousQuestion = questionNumberInt === 1 ? 1 : questionNumberInt - 1;
     const nextQuestion = questionNumberInt +1
     const {saveAnswers, answers} = useContext(SurveyContext);
-    const { data, isLoading, error } = useFetch<SurveyQuestions>(`http://localhost:8000/survey`);
+    const { data, isLoading, error } = useFetch<SurveyQuestions>(`https://shiny.herokuapp.com/survey`);
     const  surveyData  = data?.surveyData;
     function saveReply(answer:boolean) {
         saveAnswers({ [questionNumber]: answer})
