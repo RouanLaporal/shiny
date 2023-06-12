@@ -13,7 +13,7 @@ interface Result {
 interface ResultsData {
     resultsData: Result[];
 }
-function formatFetchParams(answers:Answer) {
+export function formatQueryParams(answers:Answer):string {
     const answerNumbers = Object.keys(answers)
   
     return answerNumbers.reduce((previousParams, answerNumber, index) => {
@@ -23,11 +23,17 @@ function formatFetchParams(answers:Answer) {
     }, '')
 }
 
+export function formatJobList(title:string, listlength:number, index:number){
+  if(index === listlength - 1)
+    return title
+  return `${title},`
+}
+
 function Results(){
     
     const { theme } = useTheme();
     const { answers } = useContext(SurveyContext);
-    const fetchParams = formatFetchParams(answers);
+    const fetchParams = formatQueryParams(answers);
     const { data, isLoading, error } = useFetch<ResultsData>(`http://localhost:8000/results?${fetchParams}`);
     const resultsData = data?.resultsData;
     if(error) {
@@ -48,7 +54,7 @@ function Results(){
                   key={`result-title-${index}-${result.title}`}
                   theme={theme}
                 >
-                  {result.title}
+                  {formatJobList(result.title, resultsData.length, index)}
                   {index === resultsData.length - 1 ? '' : ','}
                 </JobTitle>
               ))}
